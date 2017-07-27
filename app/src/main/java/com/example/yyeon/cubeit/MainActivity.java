@@ -14,7 +14,7 @@ public class MainActivity extends FragmentActivity {
     private Chart chart;
     private Search search;
     private Setting setting;
-
+//github test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
