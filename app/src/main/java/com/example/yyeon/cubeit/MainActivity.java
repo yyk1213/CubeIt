@@ -6,14 +6,19 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.yyeon.cubeit.fragment.ChartFragment;
-import com.example.yyeon.cubeit.fragment.MandaratFragment;
 import com.example.yyeon.cubeit.fragment.SearchFragment;
 import com.example.yyeon.cubeit.fragment.SettingFragment;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
-public class MainActivity extends AppCompatActivity {
-    private MandaratFragment mandaratFragment;
+import java.util.ArrayList;
+
+import info.kimjihyok.library.fragment.DreamListFragment;
+import info.kimjihyok.library.fragment.ZoomableGridFragment;
+import info.kimjihyok.library.widget.ZoomableLayout;
+
+public class MainActivity extends AppCompatActivity implements ZoomableLayout.MaxZoomListener {
+    private ZoomableGridFragment mandaratFragment;
     private ChartFragment chartFragment;
     private SearchFragment searchFragment;
     private SettingFragment settingFragment;
@@ -23,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mandaratFragment = new MandaratFragment();
+        mandaratFragment = ZoomableGridFragment.newInstance();
+        mandaratFragment.setMaxZoomListener(this);
+
         chartFragment = new ChartFragment();
         searchFragment = new SearchFragment();
         settingFragment = new SettingFragment();
@@ -53,6 +60,38 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.contentContainer, mandaratFragment);
         transaction.commit();
+    }
+
+    @Override
+    public void onZoomedMax() {
+        mandaratFragment.resetView();
+
+        // replace with a new fragment
+        getSupportFragmentManager().beginTransaction()
+            .add(R.id.contentContainer,
+                DreamListFragment.newInstance(
+                    DreamListFragment.Mode.VIEW_MODE
+                    , "나의 목표"
+                    , getFollowingDreamElements()))
+            .addToBackStack(DreamListFragment.TAG)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            .commit();
+    }
+
+    public ArrayList<String> getFollowingDreamElements() {
+        ArrayList<String> dreamList = new ArrayList<>();
+        dreamList.add("Lose Belly Fat");
+        dreamList.add("Lose Leg Fat");
+        dreamList.add("Good Eating Habit");
+
+        dreamList.add("Less Drinking Days");
+        dreamList.add("Lose Belly Fat");
+        dreamList.add("Lose Leg Fat");
+
+        dreamList.add("Good Eating Habit");
+        dreamList.add("Lose Belly Fat");
+        dreamList.add("Lose Leg Fat");
+        return dreamList;
     }
 }
 
