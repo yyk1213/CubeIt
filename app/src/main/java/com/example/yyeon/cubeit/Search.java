@@ -4,37 +4,32 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Search extends Fragment  {
-    public Search() {
-    }
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
-//    ListView list;
-//    ListViewAdapter adaper;
-//    SearchView searchView;
-//    String[] vacation;
-//    ArrayList<vacationPlan> arrayList=new ArrayList<vacationPlan>();
-//
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        vacation=new String[]{"방학숙제","방학계획","방학여행","방학준비"};
-//        list=(ListView)getActivity().findViewById(R.id.search_listView);
-//
-//        for(int i=0; i<vacation.length;i++){
-//            vacationPlan
-//
-//        }
-//
-//    }
+public class Search extends Fragment {
+    MaterialSearchView search_view;
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_search, container, false);
 
+        setHasOptionsMenu(true);
+        return inflater.inflate(R.layout.fragment_search, container, false);
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().setTitle("검색");
+
+        inflater.inflate(R.menu.search_bar, menu);
+        search_view = (MaterialSearchView) getView().findViewById(R.id.search_view);
+        MenuItem item = menu.findItem(R.id.action_search);
+        search_view.setMenuItem(item);
+    }
+
 }

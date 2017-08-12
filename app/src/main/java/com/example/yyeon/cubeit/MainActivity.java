@@ -2,19 +2,19 @@ package com.example.yyeon.cubeit;
 
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends AppCompatActivity {
     private Mandarat mandarat;
     private Chart chart;
     private Search search;
     private Setting setting;
-//github test
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
