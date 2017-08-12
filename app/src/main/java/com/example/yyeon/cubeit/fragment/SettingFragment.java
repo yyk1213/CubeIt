@@ -1,9 +1,11 @@
-package com.example.yyeon.cubeit;
+package com.example.yyeon.cubeit.fragment;
 
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
-public class Setting extends PreferenceFragmentCompat {
+import com.example.yyeon.cubeit.R;
+
+public class SettingFragment extends PreferenceFragmentCompat {
 
 //    private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
 //        @Override
@@ -83,7 +85,7 @@ public class Setting extends PreferenceFragmentCompat {
 //        public boolean onOptionsItemSelected(MenuItem item) {
 //            int id = item.getItemId();
 //            if (id == android.R.id.home) {
-//                startActivity(new Intent(getActivity(), Setting.class));
+//                startActivity(new Intent(getActivity(), SettingFragment.class));
 //                return true;
 //            }
 //            return super.onOptionsItemSelected(item);
@@ -109,7 +111,7 @@ public class Setting extends PreferenceFragmentCompat {
 //        public boolean onOptionsItemSelected(MenuItem item) {
 //            int id = item.getItemId();
 //            if (id == android.R.id.home) {
-//                startActivity(new Intent(getActivity(), Setting.class));
+//                startActivity(new Intent(getActivity(), SettingFragment.class));
 //                return true;
 //            }
 //            return super.onOptionsItemSelected(item);
@@ -135,7 +137,7 @@ public class Setting extends PreferenceFragmentCompat {
 //        public boolean onOptionsItemSelected(MenuItem item) {
 //            int id = item.getItemId();
 //            if (id == android.R.id.home) {
-//                startActivity(new Intent(getActivity(), Setting.class));
+//                startActivity(new Intent(getActivity(), SettingFragment.class));
 //                return true;
 //            }
 //            return super.onOptionsItemSelected(item);
@@ -162,7 +164,7 @@ public class Setting extends PreferenceFragmentCompat {
 //        public boolean onOptionsItemSelected(MenuItem item) {
 //            int id = item.getItemId();
 //            if (id == android.R.id.home) {
-//                startActivity(new Intent(getActivity(), Setting.class));
+//                startActivity(new Intent(getActivity(), SettingFragment.class));
 //                return true;
 //            }
 //            return super.onOptionsItemSelected(item);
@@ -189,7 +191,7 @@ public class Setting extends PreferenceFragmentCompat {
 //        public boolean onOptionsItemSelected(MenuItem item) {
 //            int id = item.getItemId();
 //            if (id == android.R.id.home) {
-//                startActivity(new Intent(getActivity(), Setting.class));
+//                startActivity(new Intent(getActivity(), SettingFragment.class));
 //                return true;
 //            }
 //            return super.onOptionsItemSelected(item);

@@ -4,9 +4,6 @@
     <Preference
         android:key="pref_key_join"
         android:title="회원가입">
-        <!--<intent-->
-            <!--android:action="android.intent.action.VIEW"-->
-            <!--android:targetClass="com.example.yyeon.cubeit.setting_join"/>-->
     </Preference>
 
     <Preference
