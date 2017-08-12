@@ -12,6 +12,7 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import info.kimjihyok.library.fragment.DreamListFragment;
 import info.kimjihyok.library.fragment.ZoomableGridFragment;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements ZoomableLayout.Ma
 
         mandaratFragment = ZoomableGridFragment.newInstance();
         mandaratFragment.setMaxZoomListener(this);
+        mandaratFragment.setDream(getUserDream());
+        mandaratFragment.setTargetItems(getUserTargetItems());
 
         chartFragment = new ChartFragment();
         searchFragment = new SearchFragment();
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements ZoomableLayout.Ma
                 }
             }
         });
+
     }
 
     public void initFragment() {
@@ -92,6 +96,23 @@ public class MainActivity extends AppCompatActivity implements ZoomableLayout.Ma
         dreamList.add("Lose Belly Fat");
         dreamList.add("Lose Leg Fat");
         return dreamList;
+    }
+
+    private String getUserDream() {
+        return "CEO before 29";
+    }
+
+    private List<String> getUserTargetItems() {
+        ArrayList<String> userTargetItems = new ArrayList<>();
+        userTargetItems.add("Luck");
+        userTargetItems.add("Leadership");
+        userTargetItems.add("Software Development");
+        userTargetItems.add("Personality");
+        userTargetItems.add("Self-Control");
+        userTargetItems.add("Executive Abilities");
+        userTargetItems.add("Trend Analyzing Abilities");
+        userTargetItems.add("Attractiveness");
+        return userTargetItems;
     }
 }
 
