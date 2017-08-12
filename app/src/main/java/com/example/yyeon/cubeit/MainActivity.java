@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.example.yyeon.cubeit.fragment.ChartFragment;
 import com.example.yyeon.cubeit.fragment.SearchFragment;
@@ -19,6 +20,8 @@ import info.kimjihyok.library.fragment.ZoomableGridFragment;
 import info.kimjihyok.library.widget.ZoomableLayout;
 
 public class MainActivity extends AppCompatActivity implements ZoomableLayout.MaxZoomListener {
+    private static final String TAG = "MainActivity";
+
     private ZoomableGridFragment mandaratFragment;
     private ChartFragment chartFragment;
     private SearchFragment searchFragment;
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements ZoomableLayout.Ma
 
         mandaratFragment = ZoomableGridFragment.newInstance();
         mandaratFragment.setMaxZoomListener(this);
-        mandaratFragment.setDream(getUserDream());
+        mandaratFragment.setDream(getUserDream(0));
         mandaratFragment.setTargetItems(getUserTargetItems());
 
         chartFragment = new ChartFragment();
@@ -67,7 +70,8 @@ public class MainActivity extends AppCompatActivity implements ZoomableLayout.Ma
     }
 
     @Override
-    public void onZoomedMax() {
+    public void onZoomedMax(int position) {
+        Log.d(TAG, "onZoomedMax() " + position);
         mandaratFragment.resetView();
 
         // replace with a new fragment
@@ -75,16 +79,16 @@ public class MainActivity extends AppCompatActivity implements ZoomableLayout.Ma
             .add(R.id.contentContainer,
                 DreamListFragment.newInstance(
                     DreamListFragment.Mode.VIEW_MODE
-                    , "나의 목표"
-                    , getFollowingDreamElements()))
+                    , getUserDream(position)
+                    , getFollowingDreamElements(position)))
             .addToBackStack(DreamListFragment.TAG)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .commit();
     }
 
-    public ArrayList<String> getFollowingDreamElements() {
+    public ArrayList<String> getFollowingDreamElements(int position) {
         ArrayList<String> dreamList = new ArrayList<>();
-        dreamList.add("Lose Belly Fat");
+        dreamList.add("Lose Belly Fat " + position);
         dreamList.add("Lose Leg Fat");
         dreamList.add("Good Eating Habit");
 
@@ -98,8 +102,8 @@ public class MainActivity extends AppCompatActivity implements ZoomableLayout.Ma
         return dreamList;
     }
 
-    private String getUserDream() {
-        return "CEO before 29";
+    private String getUserDream(int position) {
+        return "CEO before 29" + " pos: " + position;
     }
 
     private List<String> getUserTargetItems() {
