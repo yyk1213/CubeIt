@@ -1,1 +1,1 @@
-include ':app', ':mandart-library'
+include ':app', ':mandart-library', ':library'
