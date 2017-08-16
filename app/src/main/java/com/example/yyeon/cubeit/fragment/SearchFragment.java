@@ -1,4 +1,4 @@
-package com.example.yyeon.cubeit;
+package com.example.yyeon.cubeit.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,9 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.yyeon.cubeit.R;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
-public class Search extends Fragment {
+public class SearchFragment extends Fragment {
     MaterialSearchView search_view;
 
     @Override
