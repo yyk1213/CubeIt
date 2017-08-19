@@ -1,8 +1,10 @@
 package com.example.yyeon.cubeit;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -16,10 +18,6 @@ import com.example.yyeon.cubeit.model.controller.DreamController;
 import com.example.yyeon.cubeit.model.controller.RealmStringController;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,6 +29,8 @@ import info.kimjihyok.library.fragment.DreamListFragment;
 import info.kimjihyok.library.fragment.ZoomableGridFragment;
 import info.kimjihyok.library.widget.ZoomableLayout;
 import io.realm.RealmList;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements ZoomableLayout.MaxZoomListener {
   private static final String TAG = "MainActivity";
@@ -39,11 +39,20 @@ public class MainActivity extends AppCompatActivity implements ZoomableLayout.Ma
   private SearchFragment searchFragment;
   private SettingFragment settingFragment;
   private DreamController controller;
+    private ActionBar actionBar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+      CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+              .setDefaultFontPath("fonts/NotoSansCJKkr-Regular.otf")
+              .setFontAttrId(R.attr.fontPath)
+              .build()
+      );
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+      actionBar=getSupportActionBar();
+      actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
 
     controller = ((BaseApplication) getApplication()).getDreamController();
     controller.init();
@@ -60,41 +69,41 @@ public class MainActivity extends AppCompatActivity implements ZoomableLayout.Ma
     RealmStringController stringController = new RealmStringController();
     int pos = 0;
     for (SubTarget targets : controller.get().getTargets()) {
-      Log.d(TAG, "Dream Targets: " + targets.getName());
-      targetItems.add(targets.getName());
+        Log.d(TAG, "Dream Targets: " + targets.getName());
+        targetItems.add(targets.getName());
 
-      int tTotal = 0;
-      int tOneMonth = 0;
-      int tWeeks = 0;
+        int tTotal = 0;
+        int tOneMonth = 0;
+        int tWeeks = 0;
 
-      subTargetValueItems.put(pos, new HashMap<String, ChartValue>());
-      List<String> subItems = new ArrayList<>();
-      for(RealmString subTargets : targets.getObjectives() ){
-        subItems.add(subTargets.getString());
+        subTargetValueItems.put(pos, new HashMap<String, ChartValue>());
+        List<String> subItems = new ArrayList<>();
+        for (RealmString subTargets : targets.getObjectives()) {
+            subItems.add(subTargets.getString());
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH, -1);
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.MONTH, -1);
 
-        int sTotal = stringController.getTotalCount(subTargets.getString());
-        int sOneMonth = stringController.getTotalCount(subTargets.getString(), calendar.getTime(), new Date());
+            int sTotal = stringController.getTotalCount(subTargets.getString());
+            int sOneMonth = stringController.getTotalCount(subTargets.getString(), calendar.getTime(), new Date());
 
-        calendar.add(Calendar.MONTH, 1);
-        calendar.add(Calendar.WEEK_OF_MONTH, -1);
+            calendar.add(Calendar.MONTH, 1);
+            calendar.add(Calendar.WEEK_OF_MONTH, -1);
 
-        int sWeeks = stringController.getTotalCount(subTargets.getString(), calendar.getTime(), new Date());
+            int sWeeks = stringController.getTotalCount(subTargets.getString(), calendar.getTime(), new Date());
 
-        subTargetValueItems.get(pos).put(subTargets.getString(), new ChartValue(sWeeks, sOneMonth, sTotal));
-        tTotal += sTotal;
-        tOneMonth += sOneMonth;
-        tWeeks += sWeeks;
-      }
+            subTargetValueItems.get(pos).put(subTargets.getString(), new ChartValue(sWeeks, sOneMonth, sTotal));
+            tTotal += sTotal;
+            tOneMonth += sOneMonth;
+            tWeeks += sWeeks;
+        }
 
-      subTargetItems.put(pos++,subItems);
+        subTargetItems.put(pos++, subItems);
 
-      targetValueItems.put(targets.getName(), new ArrayList<Integer>());
-      targetValueItems.get(targets.getName()).add(tWeeks);
-      targetValueItems.get(targets.getName()).add(tOneMonth);
-      targetValueItems.get(targets.getName()).add(tTotal);
+        targetValueItems.put(targets.getName(), new ArrayList<Integer>());
+        targetValueItems.get(targets.getName()).add(tWeeks);
+        targetValueItems.get(targets.getName()).add(tOneMonth);
+        targetValueItems.get(targets.getName()).add(tTotal);
     }
 
     mandaratFragment.setTargetItems(targetItems);
@@ -167,5 +176,9 @@ public class MainActivity extends AppCompatActivity implements ZoomableLayout.Ma
     return controller.get().getTargets().get(position).getName();
   }
 
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 }
 

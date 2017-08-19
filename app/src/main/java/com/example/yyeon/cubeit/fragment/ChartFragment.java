@@ -1,35 +1,25 @@
 package com.example.yyeon.cubeit.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.AppCompatSeekBar;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dongseok.libarary.RadarChartView;
 import com.dongseok.libarary.RadarTextItemClickListener;
-import com.example.yyeon.cubeit.BaseApplication;
 import com.example.yyeon.cubeit.R;
 import com.example.yyeon.cubeit.model.ChartValue;
-import com.example.yyeon.cubeit.model.Dream;
-import com.example.yyeon.cubeit.model.RealmString;
-import com.example.yyeon.cubeit.model.SubTarget;
-import com.example.yyeon.cubeit.model.controller.DreamController;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class ChartFragment extends Fragment {
@@ -46,9 +36,31 @@ public class ChartFragment extends Fragment {
     private Map<Integer,List<String>> userSubTargetItems;
     private Map<Integer, Map<String, ChartValue>>  userSubTargetValueItems;
 
+    private SettingFragment setting;
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_setting, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.setting) {
+            setting = new SettingFragment();
+
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            getActivity().setTitle("설정");
+            transaction.replace(R.id.contentContainer, setting).commit();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         getActivity().setTitle("차트분석");
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
 

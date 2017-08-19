@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:textSize="2px">
 
     <Preference
         android:key="pref_key_join"
+<<<<<<< HEAD
         android:title="회원가입">
     </Preference>
+=======
+        android:title="회원가입"/>
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="pref_key_mandarat_open"
+        android:title="만다라트 공개" />
+>>>>>>> Design
 
     <Preference
         android:key="pref_key_image_save"
         android:title="이미지 저장" />
 
-    <Preference
-        android:key="pref_key_rock_screen"
-        android:title="잠금화면으로 설정" />
-
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="pref_key_mandarat_open"
-        android:title="만다라트 공개" />
-
-    <CheckBoxPreference
-        android:defaultValue="false"
+    <SwitchPreference
+        android:defaultValue="true"
         android:key="pref_key_push"
         android:title="푸시설정" />
+
+    <Preference
+        android:key="pref_key_rock_screen"
+        android:title="테마 변경" />
 
 </PreferenceScreen>
 

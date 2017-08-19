@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_search"
-        android:orderInCategory="100"
-        app:showAsAction="collapseActionView|ifRoom"
-        android:title="@string/app_name" />
+        android:icon="@drawable/ic_actionbar_search"
+        android:orderInCategory="0"
+        app:showAsAction="always"
+        android:title="계획표 작성"/>
+
 </menu>

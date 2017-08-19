@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme." parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#ff9117</item>
+        <item name="colorPrimaryDark">#f36f21</item>
+        <item name="colorAccent">#ff9117</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+        <item name="android:statusBarColor">#f36f21</item>
+        <item name="android:textViewStyle">@style/AppTheme.Widget.ActionView</item>
+    </style>
+
+    <style name="AppTheme.Widget.ActionView" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="fontPath">fonts/NotoSansCJKkr-Bold.otf</item>
+        <item name="android:textSize">17.5sp</item>
+    </style>
+
+    <style name="settingTheme" parent="PreferenceThemeOverlay">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="SplashTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+</resources>
