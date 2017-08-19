@@ -22,7 +22,7 @@ public class BaseApplication extends Application {
 
     Realm.init(getApplicationContext());
     RealmConfiguration configuration = new RealmConfiguration.Builder()
-        .name("default.realm")
+        .name("default.realm").deleteRealmIfMigrationNeeded()
         .schemaVersion(1)
         .build();
     Realm.setDefaultConfiguration(configuration);
