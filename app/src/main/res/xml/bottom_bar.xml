@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-    <tabs>
-
-        <tab
-        id="@+id/mandarat_btn"
-        title="만다라트"
-        showAsAction="always"/>
+<tabs>
 
     <tab
-        id="@+id/chart_btn"
-        title="통계차트"
-        showAsAction="always"/>
-    <tab
-        id="@+id/search_btn"
-        title="검색"
-        showAsAction="always"/>
-    <tab
-        id="@+id/setting_btn"
-        title="설정"
-        showAsAction="always"/>
+        badgeHidesWhenActive="true"
+        icon="@drawable/mandarat_icon"
+        id="@+id/mandarat_btn" />
 
-    </tabs>
+    <tab
+        badgeHidesWhenActive="true"
+        icon="@drawable/chart_icon"
+        id="@+id/chart_btn"/>
+    <tab
+        badgeHidesWhenActive="true"
+        icon="@drawable/search_icon"
+        id="@+id/search_btn"/>
+    <tab
+        badgeHidesWhenActive="true"
+        icon="@drawable/heart_icon"
+        id="@+id/follow_btn"/>
+
+</tabs>

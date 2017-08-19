@@ -14,7 +14,6 @@ public class Mandarat extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().setTitle("Cube it!");
         return inflater.inflate(R.layout.fragment_mandarat, container,false);
     }
 
