@@ -9,14 +9,23 @@ import android.util.Log;
 import com.example.yyeon.cubeit.fragment.ChartFragment;
 import com.example.yyeon.cubeit.fragment.SearchFragment;
 import com.example.yyeon.cubeit.fragment.SettingFragment;
+import com.example.yyeon.cubeit.model.ChartValue;
 import com.example.yyeon.cubeit.model.RealmString;
 import com.example.yyeon.cubeit.model.SubTarget;
 import com.example.yyeon.cubeit.model.controller.DreamController;
+import com.example.yyeon.cubeit.model.controller.RealmStringController;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import info.kimjihyok.library.fragment.DreamListFragment;
 import info.kimjihyok.library.fragment.ZoomableGridFragment;
@@ -44,14 +53,59 @@ public class MainActivity extends AppCompatActivity implements ZoomableLayout.Ma
     mandaratFragment.setDream(controller.get().getTargetDream());
 
     List<String> targetItems = new ArrayList<>();
+    Map<Integer, List<String>> subTargetItems = new HashMap<>();
+    Map<String, List<Integer>> targetValueItems = new HashMap<>();
+    Map<Integer, Map<String, ChartValue>> subTargetValueItems = new HashMap<>();
+
+    RealmStringController stringController = new RealmStringController();
+    int pos = 0;
     for (SubTarget targets : controller.get().getTargets()) {
       Log.d(TAG, "Dream Targets: " + targets.getName());
       targetItems.add(targets.getName());
+
+      int tTotal = 0;
+      int tOneMonth = 0;
+      int tWeeks = 0;
+
+      subTargetValueItems.put(pos, new HashMap<String, ChartValue>());
+      List<String> subItems = new ArrayList<>();
+      for(RealmString subTargets : targets.getObjectives() ){
+        subItems.add(subTargets.getString());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -1);
+
+        int sTotal = stringController.getTotalCount(subTargets.getString());
+        int sOneMonth = stringController.getTotalCount(subTargets.getString(), calendar.getTime(), new Date());
+
+        calendar.add(Calendar.MONTH, 1);
+        calendar.add(Calendar.WEEK_OF_MONTH, -1);
+
+        int sWeeks = stringController.getTotalCount(subTargets.getString(), calendar.getTime(), new Date());
+
+        subTargetValueItems.get(pos).put(subTargets.getString(), new ChartValue(sWeeks, sOneMonth, sTotal));
+        tTotal += sTotal;
+        tOneMonth += sOneMonth;
+        tWeeks += sWeeks;
+      }
+
+      subTargetItems.put(pos++,subItems);
+
+      targetValueItems.put(targets.getName(), new ArrayList<Integer>());
+      targetValueItems.get(targets.getName()).add(tWeeks);
+      targetValueItems.get(targets.getName()).add(tOneMonth);
+      targetValueItems.get(targets.getName()).add(tTotal);
     }
 
     mandaratFragment.setTargetItems(targetItems);
 
     chartFragment = new ChartFragment();
+    chartFragment.setUserDream(controller.get().getTargetDream());
+    chartFragment.setUserTargetItems(targetItems);
+    chartFragment.setUserSubTargetItems(subTargetItems);
+    chartFragment.setUserTargetValueItems(targetValueItems);
+    chartFragment.setUserSubTargetValueItems(subTargetValueItems);
+
     searchFragment = new SearchFragment();
     settingFragment = new SettingFragment();
 
@@ -112,7 +166,6 @@ public class MainActivity extends AppCompatActivity implements ZoomableLayout.Ma
   private String getSubTarget(int position) {
     return controller.get().getTargets().get(position).getName();
   }
-
 
 }
 

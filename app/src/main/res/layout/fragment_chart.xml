@@ -2,10 +2,141 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:radarChart="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.yyeon.cubeit.fragment.ChartFragment">
 
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="chart" />
+        android:orientation="vertical">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/chart_tabLayout"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            radarChart:tabIndicatorColor="#eb5706"
+            radarChart:tabSelectedTextColor="#eb5706"
+            radarChart:tabTextColor="#bcbec0"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/chart_tab1"
+                android:text="일주일"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/chart_tab2"
+                android:text="한 달"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <android.support.design.widget.TabItem
+                android:id="@+id/chart_tab3"
+                android:text="누 적"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TabLayout>
+
+        <LinearLayout
+                android:id="@+id/chart_content1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/chart_tag"
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/chart_dream_text_view"
+                        android:textSize="20sp"
+                        android:textColor="#bcbec0"
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="다이어트"/>
+
+                </LinearLayout>
+
+                <com.dongseok.libarary.RadarChartView
+                    android:id="@+id/radar_chart_view"
+                    radarChart:textSize="15sp"
+                    radarChart:textSpace="50"
+                    radarChart:lineSpace="50"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:text="달성률 통계"
+                    android:textSize="13sp"
+                    android:textColor="#bcbec0"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:background="#bcbec0"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.AppCompatSeekBar
+                        android:id="@+id/chart_seekBar"
+                        android:max="100"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:thumb="@drawable/progress_thumb"
+                        android:progressDrawable="@drawable/progress_base"
+                        android:layout_width="0dp"
+                        android:layout_height="24dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/chart_seekBar_value_view"
+                        tools:text="70%"
+                        android:textSize="32sp"
+                        android:textColor="#bcbec0"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+    </LinearLayout>
+
 </FrameLayout>
